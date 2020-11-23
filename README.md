@@ -9,6 +9,5 @@ Detect secrets and other potential policy breakages to and from the file path / 
 
 Dependencies:
 
-pygitguardian
-python-dotenv 
+pygitguardian, python-dotenv .
 
