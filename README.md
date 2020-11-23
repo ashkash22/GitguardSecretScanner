@@ -7,7 +7,7 @@ The script will:
 
 Detect secrets and other potential policy breakages to and from the file path / directory, print filenames, policy breaks and matches for all policy breaks found.
 
-Dependencies:
+Dependencies from python:
 
 pygitguardian, python-dotenv .
 
