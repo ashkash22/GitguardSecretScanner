@@ -9,16 +9,15 @@ API_KEY = os.getenv("GG_API_KEY")
 from pygitguardian import GGClient
 from pygitguardian.config import MULTI_DOCUMENT_LIMIT
 
-# Initializing GGClient
+# Init GGClient for connecting to gitguardian
 client = GGClient(api_key="API_KEY") 
 
-# Create a list of dictionaries for scanning
+# Creating a list of dictionaries for scanning files
 to_scan = []
 for name in glob.glob("**/*", recursive=True):
 	with open(name) as fn:
 		to_scan.append({"document": fn.read(), "filename": os.path.basename(name)})
 
-# Process in a chunked way to avoid passing the multi document limit
 to_process = []
 for i in range(0, len(to_scan), MULTI_DOCUMENT_LIMIT):
    chunk = to_scan[i : i + MULTI_DOCUMENT_LIMIT]
@@ -44,7 +43,7 @@ for i, scan_result in enumerate(to_process):
            for match in policy_break.matches:
                 print(f"\t\t{match.match_type}:{match.match}")
 
-#Getting results in JSON format    
+#JSON results   
 for i, scan_result in enumerate(to_process):
    if scan_result.has_policy_breaks:
        print(scan_result.to_json())
